@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,11 @@
             --blur: blur(20px);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: var(--system-font);
@@ -28,10 +33,10 @@
             height: 100vh;
             display: flex;
             overflow: hidden;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
             background-size: cover;
             backdrop-filter: blur(100px);
         }
@@ -42,7 +47,7 @@
             background: var(--glass-material);
             backdrop-filter: var(--blur);
             -webkit-backdrop-filter: var(--blur);
-            border-right: 1px solid rgba(0,0,0,0.05);
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -61,7 +66,7 @@
             border-radius: 12px;
             background: #fff;
             object-fit: contain;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .nav-title {
@@ -84,11 +89,22 @@
             color: var(--text-primary);
             transition: 0.2s;
         }
-        
-        .nav-item:hover { background: rgba(0,0,0,0.05); }
-        .nav-item.active { background: rgba(255,255,255,0.5); font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        
-        .nav-icon { width: 18px; height: 18px; opacity: 0.8; }
+
+        .nav-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-icon {
+            width: 18px;
+            height: 18px;
+            opacity: 0.8;
+        }
 
         /* --- MAIN CONTENT --- */
         .main-view {
@@ -96,7 +112,7 @@
             overflow-y: auto;
             padding: 40px;
         }
-        
+
         header {
             display: flex;
             justify-content: space-between;
@@ -104,7 +120,13 @@
             margin-bottom: 40px;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.5px; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
 
         .btn-apple {
             background: var(--system-blue);
@@ -118,8 +140,15 @@
             transition: 0.2s;
             box-shadow: 0 2px 10px rgba(0, 113, 227, 0.3);
         }
-        .btn-apple:hover { background: var(--system-blue-hover); transform: scale(1.02); }
-        .btn-apple:active { transform: scale(0.98); }
+
+        .btn-apple:hover {
+            background: var(--system-blue-hover);
+            transform: scale(1.02);
+        }
+
+        .btn-apple:active {
+            transform: scale(0.98);
+        }
 
         /* --- GRID --- */
         .grid {
@@ -139,30 +168,44 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             position: relative;
             overflow: hidden;
         }
 
         .card:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             background: white;
             z-index: 10;
         }
 
         .card-icon {
-            width: 50px; height: 50px;
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
 
         /* Category Colors */
-        .cat-tech { color: #0071e3; background: #eef7ff; }
-        .cat-cultural { color: #ff2d55; background: #fff0f2; }
-        .cat-sports { color: #34c759; background: #f0fdf4; }
+        .cat-tech {
+            color: #0071e3;
+            background: #eef7ff;
+        }
+
+        .cat-cultural {
+            color: #ff2d55;
+            background: #fff0f2;
+        }
+
+        .cat-sports {
+            color: #34c759;
+            background: #f0fdf4;
+        }
 
         .card-date {
             font-size: 0.8rem;
@@ -172,8 +215,12 @@
             margin-bottom: 5px;
         }
 
-        .card h3 { font-size: 1.3rem; margin-bottom: 8px; font-weight: 600; }
-        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
         .card p {
             font-size: 0.95rem;
             color: #424245;
@@ -183,71 +230,186 @@
 
         /* --- MODAL --- */
         .modal-backdrop {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
             z-index: 100;
             display: none;
             align-items: center;
             justify-content: center;
-            opacity: 0; transition: opacity 0.3s;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .modal-backdrop.active { display: flex; opacity: 1; }
+
+        .modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
 
         .modal {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px);
-            width: 90%; max-width: 440px;
+            width: 90%;
+            max-width: 440px;
             border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             padding: 30px;
-            transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .modal-backdrop.active .modal { transform: scale(1); }
 
-        .modal h2 { margin-bottom: 5px; text-align: center; }
-        .modal-subtitle { text-align: center; color: var(--system-gray); margin-bottom: 25px; font-size: 0.9rem; }
+        .modal-backdrop.active .modal {
+            transform: scale(1);
+        }
 
-        .form-group { margin-bottom: 15px; }
-        
+        .modal h2 {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            color: var(--system-gray);
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
         .input-field {
             width: 100%;
             padding: 12px 16px;
             border-radius: 12px;
             border: 1px solid #d2d2d7;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255, 255, 255, 0.5);
             font-size: 1rem;
             font-family: inherit;
             transition: 0.2s;
         }
+
         .input-field:focus {
             outline: none;
             border-color: var(--system-blue);
             box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
             background: white;
         }
-        
-        .error-msg { color: var(--system-red); font-size: 0.8rem; margin-top: 5px; display: none; margin-left: 5px; }
 
-        .modal-actions { display: flex; gap: 10px; margin-top: 25px; }
-        .btn-full { width: 100%; padding: 12px; border-radius: 12px; font-size: 1rem; }
-        .btn-secondary { background: #e5e5ea; color: black; box-shadow: none; }
-        .btn-secondary:hover { background: #d1d1d6; transform: none;}
+        .error-msg {
+            color: var(--system-red);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+            margin-left: 5px;
+        }
 
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background: #e5e5ea;
+            color: black;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d1d6;
+            transform: none;
+        }
+
+        /* --- ADMIN BADGE --- */
+        .admin-badge {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #0071e3 0%, #5856d6 100%);
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .admin-badge.visible {
+            display: flex;
+        }
+
+        .admin-badge svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .admin-logout {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            color: white;
+            padding: 3px 9px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        .admin-logout:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-apple.btn-locked {
+            background: #86868b;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-apple.btn-locked:hover {
+            background: #6e6e73;
+        }
+
+        .login-error {
+            color: var(--system-red);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="sidebar">
         <div class="logo-container">
-            <img src="data:image/png;base64,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" alt="Logo">
+            <img src="data:image/png;base64,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"
+                alt="Logo">
         </div>
 
         <div class="nav-item active" id="nav-all" onclick="filterEvents('all')">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
             All Events
         </div>
-        
+
         <div class="nav-title">Categories</div>
         <div class="nav-item" id="nav-tech" onclick="filterEvents('tech')">
             <span style="color: #0071e3">●</span> Tech
@@ -260,9 +422,18 @@
         </div>
 
         <div style="margin-top: auto;">
-            <div class="nav-item">
-                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                Account
+            <div class="admin-badge" id="adminBadge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Admin
+                <button class="admin-logout" onclick="logoutAdmin()">Logout</button>
+            </div>
+            <div class="nav-item" id="adminLoginBtn" onclick="openModal('adminLoginModal')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Admin Login
             </div>
         </div>
     </div>
@@ -270,13 +441,13 @@
     <div class="main-view">
         <header>
             <h1>Discover Events</h1>
-            <button class="btn-apple" onclick="openModal('createModal')">
+            <button class="btn-apple" id="newEventBtn" onclick="handleNewEventClick()">
                 + New Event
             </button>
         </header>
 
         <div class="grid" id="eventsGrid">
-            </div>
+        </div>
     </div>
 
     <div class="modal-backdrop" id="createModal">
@@ -301,7 +472,8 @@
                     <input type="date" id="c_date" class="input-field" required>
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="btn-apple btn-full btn-secondary" onclick="closeModal('createModal')">Cancel</button>
+                    <button type="button" class="btn-apple btn-full btn-secondary"
+                        onclick="closeModal('createModal')">Cancel</button>
                     <button type="submit" class="btn-apple btn-full">Add Event</button>
                 </div>
             </form>
@@ -322,18 +494,46 @@
                     <div class="error-msg" id="emailErr">Use a valid @gmail.com address</div>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="regPhone" class="input-field" placeholder="Phone (10 digits)" maxlength="10" required>
+                    <input type="text" id="regPhone" class="input-field" placeholder="Phone (10 digits)" maxlength="10"
+                        required>
                     <div class="error-msg" id="phoneErr">Enter a valid 10-digit number</div>
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="btn-apple btn-full btn-secondary" onclick="closeModal('registerModal')">Cancel</button>
+                    <button type="button" class="btn-apple btn-full btn-secondary"
+                        onclick="closeModal('registerModal')">Cancel</button>
                     <button type="submit" class="btn-apple btn-full">Sign Up</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Admin Login Modal -->
+    <div class="modal-backdrop" id="adminLoginModal">
+        <div class="modal">
+            <h2>🔒 Admin Login</h2>
+            <p class="modal-subtitle">Only admins can create events</p>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <input type="text" id="admin_user" class="input-field" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="admin_pass" class="input-field" placeholder="Password" required>
+                </div>
+                <div class="login-error" id="loginError">Invalid username or password</div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-apple btn-full btn-secondary"
+                        onclick="closeModal('adminLoginModal')">Cancel</button>
+                    <button type="submit" class="btn-apple btn-full">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // --- ADMIN CREDENTIALS ---
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'admin123';
+
         // --- DATA INITIALIZATION ---
         const defaultEvents = [
             { id: 1, title: 'WWDC Student Challenge', category: 'tech', date: '2024-06-10', desc: 'Code your way to the top using Swift.' },
@@ -348,10 +548,12 @@
         }
 
         let currentCategory = 'all';
+        let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
-        window.onload = function() {
+        window.onload = function () {
             // Set date input min to today
             document.getElementById('c_date').min = new Date().toISOString().split("T")[0];
+            updateAdminUI();
             renderEvents();
         };
 
@@ -361,19 +563,19 @@
             grid.innerHTML = '';
 
             // Filter
-            const filtered = currentCategory === 'all' 
-                ? events 
+            const filtered = currentCategory === 'all'
+                ? events
                 : events.filter(e => e.category === currentCategory);
 
             if (filtered.length === 0) {
                 grid.innerHTML = `<div style="color:white; text-align:center; grid-column: 1/-1; padding-top:50px;">No events found in this category.</div>`;
                 return;
             }
-            
+
             filtered.forEach(e => {
                 let icon = e.category === 'tech' ? '💻' : e.category === 'cultural' ? '🎨' : '⚽';
                 let catClass = `cat-${e.category}`;
-                
+
                 // Pretty date format
                 const d = new Date(e.date);
                 const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
@@ -391,10 +593,10 @@
 
         function filterEvents(category) {
             currentCategory = category;
-            
+
             // UI: Update Active State
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            
+
             // Highlight the correct button
             if (category === 'all') {
                 document.getElementById('nav-all').classList.add('active');
@@ -405,11 +607,62 @@
             renderEvents();
         }
 
+        // --- ADMIN AUTH ---
+        function handleNewEventClick() {
+            if (isAdmin) {
+                openModal('createModal');
+            } else {
+                openModal('adminLoginModal');
+            }
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('admin_user').value;
+            const pass = document.getElementById('admin_pass').value;
+
+            if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+                isAdmin = true;
+                sessionStorage.setItem('isAdmin', 'true');
+                document.getElementById('loginError').style.display = 'none';
+                e.target.reset();
+                closeModal('adminLoginModal');
+                updateAdminUI();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            sessionStorage.removeItem('isAdmin');
+            updateAdminUI();
+        }
+
+        function updateAdminUI() {
+            const badge = document.getElementById('adminBadge');
+            const loginBtn = document.getElementById('adminLoginBtn');
+            const newBtn = document.getElementById('newEventBtn');
+
+            if (isAdmin) {
+                badge.classList.add('visible');
+                loginBtn.style.display = 'none';
+                newBtn.classList.remove('btn-locked');
+                newBtn.innerHTML = '+ New Event';
+            } else {
+                badge.classList.remove('visible');
+                loginBtn.style.display = '';
+                newBtn.classList.add('btn-locked');
+                newBtn.innerHTML = '🔒 New Event';
+            }
+        }
+
         // --- MODALS ---
         function openModal(id) { document.getElementById(id).classList.add('active'); }
-        function closeModal(id) { 
-            document.getElementById(id).classList.remove('active'); 
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
             document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+            document.getElementById('loginError').style.display = 'none';
         }
 
         function openRegister(id) {
@@ -430,15 +683,15 @@
                 desc: document.getElementById('c_desc').value,
                 date: document.getElementById('c_date').value
             };
-            
+
             events.unshift(newEvent); // Add to top
             localStorage.setItem('appleEvents', JSON.stringify(events));
-            
+
             e.target.reset();
             closeModal('createModal');
-            
+
             // If we are currently filtered to a category that isn't this new event, switch to all
-            if(currentCategory !== 'all' && currentCategory !== newEvent.category) {
+            if (currentCategory !== 'all' && currentCategory !== newEvent.category) {
                 filterEvents('all');
             } else {
                 renderEvents();
@@ -457,7 +710,7 @@
             document.getElementById('emailErr').style.display = emailValid ? 'none' : 'block';
             document.getElementById('phoneErr').style.display = phoneValid ? 'none' : 'block';
 
-            if(emailValid && phoneValid) {
+            if (emailValid && phoneValid) {
                 // Simulate "Done" animation
                 alert("Registered Successfully! ✅");
                 closeModal('registerModal');
@@ -466,4 +719,5 @@
         }
     </script>
 </body>
+
 </html>
