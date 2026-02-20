@@ -180,6 +180,10 @@
             padding: 6px 14px;
             border-radius: 20px;
             background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .admin-indicator.super-admin {
+            background: linear-gradient(135deg, #F05537, #ff6b35);
             color: white;
             font-size: 0.78rem;
             font-weight: 600;
@@ -193,7 +197,7 @@
             background: rgba(255, 255, 255, 0.25);
             border: none;
             color: white;
-            padding: 2px 8px;
+            padding: 3px 9px;
             border-radius: 6px;
             font-size: 0.72rem;
             cursor: pointer;
@@ -660,6 +664,114 @@
             margin-left: 4px;
         }
 
+        .nav-btn.btn-manage {
+            background: transparent;
+            color: var(--eb-text);
+            border: 2px solid var(--eb-border);
+            display: none;
+        }
+
+        .nav-btn.btn-manage:hover {
+            border-color: var(--eb-orange);
+            color: var(--eb-orange);
+        }
+
+        .nav-btn.btn-manage.visible {
+            display: flex;
+        }
+
+        /* === MANAGE ADMINS PANEL === */
+        .admin-list {
+            list-style: none;
+            margin: 16px 0;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+
+        .admin-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: var(--eb-bg);
+            margin-bottom: 8px;
+            border: 1px solid var(--eb-border);
+        }
+
+        .admin-list-item .admin-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .admin-list-item .admin-email {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--eb-dark);
+        }
+
+        .admin-list-item .admin-role {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--eb-gray);
+        }
+
+        .admin-list-item .admin-role.super {
+            color: var(--eb-orange);
+        }
+
+        .btn-remove-admin {
+            background: rgba(240, 85, 55, 0.1);
+            color: var(--eb-red);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: 0.2s;
+        }
+
+        .btn-remove-admin:hover {
+            background: rgba(240, 85, 55, 0.2);
+        }
+
+        .add-admin-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .add-admin-row input {
+            flex: 1;
+        }
+
+        .btn-add-admin {
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: var(--eb-orange);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-family: var(--font);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .btn-add-admin:hover {
+            background: var(--eb-orange-hover);
+        }
+
+        .add-admin-error {
+            color: var(--eb-red);
+            font-size: 0.8rem;
+            margin-top: 6px;
+            display: none;
+        }
+
         .login-error {
             color: var(--eb-red);
             font-size: 0.85rem;
@@ -897,9 +1009,18 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                Admin
+                <span id="adminBadgeText">Admin</span>
                 <button onclick="logoutAdmin()">Logout</button>
             </div>
+            <button class="nav-btn btn-manage" id="manageAdminsBtn" onclick="openManageAdmins()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 13h-6" />
+                    <path d="M20 10v6" />
+                </svg>
+                Manage Admins
+            </button>
             <button class="nav-btn btn-ghost" id="adminLoginBtn" onclick="openModal('adminLoginModal')">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -1066,17 +1187,18 @@
     <div class="modal-backdrop" id="adminLoginModal">
         <div class="modal">
             <h2>🔐 Admin Access</h2>
-            <p class="modal-subtitle">Sign in to create and manage events</p>
+            <p class="modal-subtitle">Sign in with your admin credentials</p>
             <form onsubmit="handleAdminLogin(event)">
                 <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <input type="text" id="admin_user" class="input-field" placeholder="Enter admin username" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" id="admin_email" class="input-field" placeholder="yourname@klh.edu.in" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" id="admin_pass" class="input-field" placeholder="Enter password" required>
+                    <input type="password" id="admin_pass" class="input-field" placeholder="Enter your password"
+                        required>
                 </div>
-                <div class="login-error" id="loginError">Invalid username or password</div>
+                <div class="login-error" id="loginError">Invalid email or password</div>
                 <div class="modal-actions">
                     <button type="button" class="btn-modal btn-modal-secondary"
                         onclick="closeModal('adminLoginModal')">Cancel</button>
@@ -1086,19 +1208,59 @@
         </div>
     </div>
 
+    <!-- ===== MANAGE ADMINS MODAL ===== -->
+    <div class="modal-backdrop" id="manageAdminsModal">
+        <div class="modal">
+            <h2>👥 Manage Admins</h2>
+            <p class="modal-subtitle">Add or remove admin accounts</p>
+            <ul class="admin-list" id="adminList"></ul>
+            <div class="add-admin-row">
+                <input type="email" id="newAdminEmail" class="input-field" placeholder="newadmin@klh.edu.in">
+                <input type="password" id="newAdminPass" class="input-field" placeholder="Password"
+                    style="max-width:140px">
+                <button class="btn-add-admin" onclick="addAdmin()">+ Add</button>
+            </div>
+            <div class="add-admin-error" id="addAdminError"></div>
+            <div class="modal-actions" style="margin-top:20px">
+                <button class="btn-modal btn-modal-secondary" style="width:100%"
+                    onclick="closeModal('manageAdminsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // === ADMIN CREDENTIALS ===
-        const ADMIN_USERNAME = 'admin';
-        const ADMIN_PASSWORD = 'admin123';
+        // === SUPER ADMIN (hardcoded owner — cannot be removed) ===
+        const SUPER_ADMIN = { email: 'saiharshith@klh.edu.in', password: 'YEET@error467' };
+        const ADMIN_EMAIL_DOMAIN = '@klh.edu.in';
+
+        // === ADMIN LIST (localStorage) ===
+        function getAdminList() {
+            let admins = JSON.parse(localStorage.getItem('ebAdmins'));
+            if (!admins) {
+                admins = [{ email: SUPER_ADMIN.email, password: SUPER_ADMIN.password, role: 'super' }];
+                localStorage.setItem('ebAdmins', JSON.stringify(admins));
+            }
+            // Always ensure super admin exists
+            const hasSuperAdmin = admins.some(a => a.email === SUPER_ADMIN.email);
+            if (!hasSuperAdmin) {
+                admins.unshift({ email: SUPER_ADMIN.email, password: SUPER_ADMIN.password, role: 'super' });
+                localStorage.setItem('ebAdmins', JSON.stringify(admins));
+            }
+            return admins;
+        }
+
+        function saveAdminList(admins) {
+            localStorage.setItem('ebAdmins', JSON.stringify(admins));
+        }
 
         // === DATA ===
         const defaultEvents = [
-            { id: 1, title: 'WWDC Student Challenge 2026', category: 'tech', date: '2026-06-10', desc: 'Code your way to the top using Swift and cutting-edge Apple frameworks.', location: 'Innovation Lab, Block C' },
-            { id: 2, title: 'Spring Music & Arts Festival', category: 'cultural', date: '2026-04-15', desc: 'An evening of live acoustic sessions, art installations, and creative performances.', location: 'Central Quad Amphitheatre' },
-            { id: 3, title: 'Inter-College Football Championship', category: 'sports', date: '2026-05-20', desc: 'The grand finals featuring the top 8 college teams battling for the trophy.', location: 'University Sports Arena' },
-            { id: 4, title: 'AI & Machine Learning Workshop', category: 'tech', date: '2026-03-12', desc: 'Hands-on workshop covering neural networks, NLP, and real-world AI applications.', location: 'CS Department, Room 301' },
-            { id: 5, title: 'Annual Dance Competition', category: 'cultural', date: '2026-04-28', desc: 'Solo and group dance performances across classical, contemporary, and street styles.', location: 'Performing Arts Center' },
-            { id: 6, title: 'Marathon for Mental Health', category: 'sports', date: '2026-03-05', desc: 'A 5K campus run to raise awareness and funds for student mental health support.', location: 'Campus Main Gate' }
+            { id: 1, title: 'WWDC Student Challenge 2026', category: 'tech', date: '2026-06-10', desc: 'Code your way to the top using Swift and cutting-edge Apple frameworks.', location: 'Innovation Lab, Block C', registrations: 0 },
+            { id: 2, title: 'Spring Music & Arts Festival', category: 'cultural', date: '2026-04-15', desc: 'An evening of live acoustic sessions, art installations, and creative performances.', location: 'Central Quad Amphitheatre', registrations: 0 },
+            { id: 3, title: 'Inter-College Football Championship', category: 'sports', date: '2026-05-20', desc: 'The grand finals featuring the top 8 college teams battling for the trophy.', location: 'University Sports Arena', registrations: 0 },
+            { id: 4, title: 'AI & Machine Learning Workshop', category: 'tech', date: '2026-03-12', desc: 'Hands-on workshop covering neural networks, NLP, and real-world AI applications.', location: 'CS Department, Room 301', registrations: 0 },
+            { id: 5, title: 'Annual Dance Competition', category: 'cultural', date: '2026-04-28', desc: 'Solo and group dance performances across classical, contemporary, and street styles.', location: 'Performing Arts Center', registrations: 0 },
+            { id: 6, title: 'Marathon for Mental Health', category: 'sports', date: '2026-03-05', desc: 'A 5K campus run to raise awareness and funds for student mental health support.', location: 'Campus Main Gate', registrations: 0 }
         ];
 
         let events = JSON.parse(localStorage.getItem('ebEvents'));
@@ -1110,6 +1272,11 @@
         let currentCategory = 'all';
         let searchQuery = '';
         let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+        let currentAdminEmail = sessionStorage.getItem('adminEmail') || '';
+
+        function isSuperAdmin() {
+            return currentAdminEmail === SUPER_ADMIN.email;
+        }
 
         window.onload = function () {
             document.getElementById('c_date').min = new Date().toISOString().split("T")[0];
@@ -1183,7 +1350,7 @@
                                 <span class="card-price">Free</span>
                                 <span class="card-attendees">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                    ${Math.floor(Math.random() * 150 + 20)} going
+                                    ${e.registrations || 0} registered
                                 </span>
                             </div>
                         </div>
@@ -1241,12 +1408,17 @@
 
         function handleAdminLogin(e) {
             e.preventDefault();
-            const user = document.getElementById('admin_user').value;
+            const email = document.getElementById('admin_email').value.trim().toLowerCase();
             const pass = document.getElementById('admin_pass').value;
 
-            if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+            const admins = getAdminList();
+            const match = admins.find(a => a.email === email && a.password === pass);
+
+            if (match) {
                 isAdmin = true;
+                currentAdminEmail = email;
                 sessionStorage.setItem('isAdmin', 'true');
+                sessionStorage.setItem('adminEmail', email);
                 document.getElementById('loginError').style.display = 'none';
                 e.target.reset();
                 closeModal('adminLoginModal');
@@ -1258,7 +1430,9 @@
 
         function logoutAdmin() {
             isAdmin = false;
+            currentAdminEmail = '';
             sessionStorage.removeItem('isAdmin');
+            sessionStorage.removeItem('adminEmail');
             updateAdminUI();
         }
 
@@ -1266,18 +1440,99 @@
             const badge = document.getElementById('adminBadge');
             const loginBtn = document.getElementById('adminLoginBtn');
             const createBtn = document.getElementById('createEventBtn');
+            const manageBtn = document.getElementById('manageAdminsBtn');
+            const badgeText = document.getElementById('adminBadgeText');
 
             if (isAdmin) {
                 badge.classList.add('visible');
                 loginBtn.style.display = 'none';
                 createBtn.classList.remove('btn-locked');
                 createBtn.innerHTML = '+ Create Event';
+
+                if (isSuperAdmin()) {
+                    badge.classList.add('super-admin');
+                    badgeText.textContent = 'Super Admin';
+                    manageBtn.classList.add('visible');
+                } else {
+                    badge.classList.remove('super-admin');
+                    badgeText.textContent = 'Admin';
+                    manageBtn.classList.remove('visible');
+                }
             } else {
-                badge.classList.remove('visible');
+                badge.classList.remove('visible', 'super-admin');
                 loginBtn.style.display = '';
                 createBtn.classList.add('btn-locked');
                 createBtn.innerHTML = '🔒 Create Event';
+                manageBtn.classList.remove('visible');
             }
+        }
+
+        // === MANAGE ADMINS ===
+        function openManageAdmins() {
+            if (!isSuperAdmin()) return;
+            renderAdminList();
+            openModal('manageAdminsModal');
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('adminList');
+            const admins = getAdminList();
+            list.innerHTML = '';
+
+            admins.forEach(a => {
+                const isSuperRole = a.role === 'super' || a.email === SUPER_ADMIN.email;
+                list.innerHTML += `
+                    <li class="admin-list-item">
+                        <div class="admin-info">
+                            <span class="admin-email">${a.email}</span>
+                            <span class="admin-role ${isSuperRole ? 'super' : ''}">${isSuperRole ? '⭐ Super Admin (You)' : 'Admin'}</span>
+                        </div>
+                        ${!isSuperRole ? `<button class="btn-remove-admin" onclick="removeAdmin('${a.email}')">Remove</button>` : ''}
+                    </li>
+                `;
+            });
+        }
+
+        function addAdmin() {
+            const emailInput = document.getElementById('newAdminEmail');
+            const passInput = document.getElementById('newAdminPass');
+            const errorEl = document.getElementById('addAdminError');
+            const email = emailInput.value.trim().toLowerCase();
+            const pass = passInput.value;
+
+            // Validate
+            if (!email.endsWith(ADMIN_EMAIL_DOMAIN)) {
+                errorEl.textContent = 'Only @klh.edu.in emails can be added as admins';
+                errorEl.style.display = 'block';
+                return;
+            }
+            if (!pass || pass.length < 4) {
+                errorEl.textContent = 'Password must be at least 4 characters';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            const admins = getAdminList();
+            if (admins.some(a => a.email === email)) {
+                errorEl.textContent = 'This email is already an admin';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            admins.push({ email, password: pass, role: 'admin' });
+            saveAdminList(admins);
+            errorEl.style.display = 'none';
+            emailInput.value = '';
+            passInput.value = '';
+            renderAdminList();
+        }
+
+        function removeAdmin(email) {
+            if (email === SUPER_ADMIN.email) return;
+            let admins = getAdminList();
+            admins = admins.filter(a => a.email !== email);
+            saveAdminList(admins);
+            renderAdminList();
         }
 
         // === CREATE EVENT ===
@@ -1318,9 +1573,17 @@
             document.getElementById('phoneErr').style.display = phoneValid ? 'none' : 'block';
 
             if (emailValid && phoneValid) {
+                // Increment real registration count
+                const eventId = parseInt(document.getElementById('regEventId').value);
+                const ev = events.find(ev => ev.id === eventId);
+                if (ev) {
+                    ev.registrations = (ev.registrations || 0) + 1;
+                    localStorage.setItem('ebEvents', JSON.stringify(events));
+                }
                 alert("🎉 You're registered! Check your email for confirmation.");
                 closeModal('registerModal');
                 e.target.reset();
+                renderEvents();
             }
         }
     </script>
